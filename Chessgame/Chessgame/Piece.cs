@@ -55,5 +55,46 @@ namespace Chessgame
         {
             sb.Draw(_pieceTexture, _piecePosition, _color);
         }
+        public List<Vector2> Move()
+        {
+            List<Vector2> Moves = new List<Vector2>();
+
+            if (_pieceName == "Pawn") 
+            {
+                if(_team == "B")
+                {
+                    if (_hasMoved == false)
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X, _piecePosition.Y + 100));
+                        Moves.Add(new Vector2(_piecePosition.X, _piecePosition.Y + 200));
+                    }
+                    else
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X, _piecePosition.Y + 100));
+                    }
+                }
+                if (_team == "W")
+                {
+                    if (_hasMoved == false)
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X, _piecePosition.Y - 100));
+                        Moves.Add(new Vector2(_piecePosition.X, _piecePosition.Y - 200));
+                    }
+                    else
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X, _piecePosition.Y - 100));
+                    }
+                }
+
+            }
+            if(_pieceName == "Rook")
+            {
+
+            }
+            
+            return (Moves);
+            
+            
+        }
     }
 }
