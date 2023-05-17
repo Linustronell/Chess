@@ -91,7 +91,7 @@ namespace Chessgame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             mState = Mouse.GetState();
@@ -99,20 +99,35 @@ namespace Chessgame
 
             if (mState.LeftButton == ButtonState.Pressed && mRealeased == true)
             {
+                if (ActivePiece != null)
+                {
+                    for(int i = 0; i < Moves.Count; i++)
+                    {
+                        Rectangle REC = new Rectangle((int)Moves[i].X, (int)Moves[i].Y, 100, 100);
+                        if (REC.Contains(mState.X, mState.Y))
+                        {
+                            ActivePiece._piecePosition.X = REC.X;
+                            ActivePiece._piecePosition.Y = REC.Y;
+                        }
+                    }
+                    
+                    ActivePiece = null;
+                    
+                }
+                
+
                 foreach (var p in pieces)
+                {
                     if (p.Value.Clicked(mState.Position.ToVector2()))
                     {
-                        
-                        Moves = p.Value.Move();
+                        if(ActivePiece == null)
+                        {
+                            ActivePiece = p.Value;
+                            Moves = p.Value.AvailableMoves();
+                            break;
+                        }
                     }
-
-
-                
-                
-
-                
-
-
+                }
                 mRealeased = false;
             }
 
