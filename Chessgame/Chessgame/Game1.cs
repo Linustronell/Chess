@@ -129,9 +129,18 @@ namespace Chessgame
                     {
                         if(ActivePiece == null)
                         {
-                            ActivePiece = p.Value;
-                            Moves = p.Value.AvailableMoves();
-                            break;
+                            if(whiteTurn && p.Value._team == "W")
+                            {
+                                ActivePiece = p.Value;
+                                Moves = p.Value.AvailableMoves();
+                                break;
+                            }
+                            else if(whiteTurn == false && p.Value._team == "B")
+                            {
+                                ActivePiece = p.Value;
+                                Moves = p.Value.AvailableMoves();
+                                break;
+                            }
                         }
                     }
                 }
