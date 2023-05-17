@@ -110,6 +110,11 @@ namespace Chessgame
                         {
                             ActivePiece._piecePosition.X = REC.X;
                             ActivePiece._piecePosition.Y = REC.Y;
+                            ActivePiece._boundingBox = REC;
+                            if(ActivePiece._hasMoved == false)
+                            {
+                                ActivePiece._hasMoved = true;
+                            }
                         }
                     }
                     
