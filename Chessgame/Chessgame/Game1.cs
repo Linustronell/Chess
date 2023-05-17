@@ -20,6 +20,8 @@ namespace Chessgame
         Texture2D brownBlock;
         Texture2D Circle;
 
+        Piece ActivePiece = null;
+
         List<int> postion = new List<int>() { 0, 100, 200, 300, 400, 500, 600, 700 };
         Dictionary<string, Piece> pieces = new Dictionary<string, Piece>();
         public List<Vector2> Moves = new List<Vector2>();
@@ -91,7 +93,7 @@ namespace Chessgame
 
         protected override void Update(GameTime gameTime)
         {
-                        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             mState = Mouse.GetState();
@@ -176,12 +178,15 @@ namespace Chessgame
                     }
                 }
             }
-
-            for (int i = 0; Moves.Count > i; i++)
+            if(ActivePiece != null)
             {
-                _spriteBatch.Draw(Circle, Moves[i], Color.White);
+                for (int i = 0; Moves.Count > i; i++)
+                {
+                    _spriteBatch.Draw(Circle, Moves[i], Color.White);
+                }
             }
-            Moves.Clear();
+
+
 
 
 
