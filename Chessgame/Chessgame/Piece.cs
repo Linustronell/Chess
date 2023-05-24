@@ -96,7 +96,34 @@ namespace Chessgame
             }
             if (_pieceName == "Bishop")
             {
-
+                for(int i = 0; i < 8; i++)
+                {
+                    if(_piecePosition.X + (100*i) <= 800 && _piecePosition.Y + (100*i) <=800)
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X + (100*i), _piecePosition.Y + (100*i)));
+                    }
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    if (_piecePosition.X + (100 * i) >= 100 && _piecePosition.Y + (100 * i) <= 800)
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X - (100 * i), _piecePosition.Y + (100 * i)));
+                    }
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    if (_piecePosition.X + (100 * i) <= 800 && _piecePosition.Y + (100 * i) >= 100)
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X + (100 * i), _piecePosition.Y - (100 * i)));
+                    }
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    if (_piecePosition.X + (100 * i) >= 100 && _piecePosition.Y + (100 * i) >= 100)
+                    {
+                        Moves.Add(new Vector2(_piecePosition.X - (100 * i), _piecePosition.Y - (100 * i)));
+                    }
+                }
             }
             if (_pieceName == "Queen")
             {
