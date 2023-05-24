@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
+
 namespace Chessgame
 {
     internal class Piece
@@ -20,6 +22,7 @@ namespace Chessgame
         public bool _hasMoved;
         public Rectangle _boundingBox;
         public Color _color;
+        
 
         public Piece(Vector2 piecePosition, Texture2D pieceTexture, bool isAlive, bool hasMoved, string pieceName, string team)
         {
@@ -35,6 +38,7 @@ namespace Chessgame
                 _color = Color.Black;
             }
             _boundingBox = new Rectangle((int)_piecePosition.X, (int)_piecePosition.Y, 100, 100);
+            
         }
 
         public bool Clicked(Vector2 mousePos)
@@ -45,14 +49,22 @@ namespace Chessgame
             }
             return false;
         }
+        
+
+        //public void Move(float x, float y) 
+        //{
+        //    _piecePosition.X = x;
+        //    _piecePosition.Y = y;
+        //    _boundingBox = new Rectangle((int)_piecePosition.X, (int)_piecePosition.Y, 100, 100);
+        //}
 
         public List<Vector2> AvailableMoves()
         {
             List<Vector2> Moves = new List<Vector2>();
 
-            if (_pieceName == "Pawn") 
+            if (_pieceName == "Pawn")
             {
-                if(_team == "B")
+                if (_team == "B")
                 {
                     if (_hasMoved == false)
                     {
@@ -78,19 +90,57 @@ namespace Chessgame
                 }
 
             }
-            if(_pieceName == "Rook")
+            if (_pieceName == "Rook")
+            {
+                
+            }
+            if (_pieceName == "Bishop")
             {
 
             }
-            
+            if (_pieceName == "Queen")
+            {
+
+            }
+            if (_pieceName == "King")
+            {
+
+            }
+            if (_pieceName == "Horse")
+            {
+
+            }
+
             return (Moves);
-            
-            
+
+
         }
-        
+        public List<Vector2> legalmove(Dictionary<string, Piece> Pieces, List<Vector2> Moves)
+        {
+            for(int i = 0; Moves.Count > i; i++)
+            {
+                foreach (var p in Pieces)
+                {
+                    if(Moves.Count == 0)
+                    {
+                        return (Moves);
+                    }
+                    else if(Moves[i].X == p.Value._piecePosition.X && Moves[i].Y == p.Value._piecePosition.Y)
+                    {
+                        Moves.RemoveAt(i);
+                    }
+                }
+
+                
+            }
+            return (Moves);
+        }
+
 
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(_pieceTexture, _piecePosition, _color);
         }
+    }
+}
         
