@@ -89,6 +89,7 @@ namespace Chessgame
                     pieces.Add(pieceTypesW[i], new Piece(new Vector2(i * 100, 700), Content.Load<Texture2D>(pieceNames[i] + "W"), true, false, pieceNames[i], "W"));
                 }
             }
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -103,6 +104,7 @@ namespace Chessgame
             {
                 if (ActivePiece != null)
                 {
+                    
                     for(int i = 0; i < Moves.Count; i++)
                     {
                         Rectangle REC = new Rectangle((int)Moves[i].X, (int)Moves[i].Y, 100, 100);
@@ -115,11 +117,12 @@ namespace Chessgame
                             {
                                 ActivePiece._hasMoved = true;
                             }
+                            whiteTurn = !whiteTurn;
                         }
                     }
                     
                     ActivePiece = null;
-                    
+                    mRealeased = false;
                 }
                 
 
@@ -129,16 +132,19 @@ namespace Chessgame
                     {
                         if(ActivePiece == null)
                         {
-                            if(whiteTurn && p.Value._team == "W")
+                            if(whiteTurn == true && p.Value._team == "W")
                             {
                                 ActivePiece = p.Value;
                                 Moves = p.Value.AvailableMoves();
+                                p.Value.legalmove(pieces, Moves);
+                                
                                 break;
                             }
                             else if(whiteTurn == false && p.Value._team == "B")
                             {
                                 ActivePiece = p.Value;
                                 Moves = p.Value.AvailableMoves();
+                                p.Value.legalmove(pieces, Moves);
                                 break;
                             }
                         }
@@ -199,14 +205,6 @@ namespace Chessgame
                     _spriteBatch.Draw(Circle, Moves[i], Color.White);
                 }
             }
-
-
-
-
-
-
-
-
 
             //Draw Pieces
             foreach (var p in pieces)
